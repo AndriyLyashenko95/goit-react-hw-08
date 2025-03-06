@@ -12,10 +12,10 @@ const Contact = ({ contactItem }) => {
     <div>
       <ul>
         <li>
-          <FaUser/> {name}
+          <FaUser className={c.icon}/> {name}
         </li>
         <li>
-          <BsFillTelephoneFill/> {phone}
+          <BsFillTelephoneFill className={c.icon}/> {phone}
         </li>
       </ul>
       <button

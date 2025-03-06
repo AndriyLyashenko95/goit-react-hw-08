@@ -1,31 +1,43 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchContacts } from './redux/contactsOps';
-import { useSelector } from 'react-redux';
-import { selectLoading, selectError } from './redux/contactsSlice';
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import SearchBox from './components/SearchBox/SearchBox';
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshUser } from './redux/auth/operations';
+import Layout from './components/Layout/Layout';
+import HomePage from './pages/HomePage/HomePage';
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import ContactsPage from './pages/ContactsPage/ContactsPage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
 
 const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (isRefreshing) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>Телефонна книга</h1>
-      <SearchBox />
-      <ContactForm />
-      <ContactList />
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/register"
+          element={<RestrictedRoute component={<RegistrationPage />} />}
+        />
+        <Route
+          path="/login"
+          element={<RestrictedRoute component={<LoginPage />} />}
+        />
+        <Route
+          path="/contacts"
+          element={<PrivateRoute component={<ContactsPage />} />}
+        />
+      </Routes>
+    </Layout>
   );
 };
 
