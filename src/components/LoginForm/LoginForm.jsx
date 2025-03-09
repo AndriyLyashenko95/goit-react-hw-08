@@ -1,29 +1,30 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/auth/operations";
+import { logIn } from "../../redux/auth/operations";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import { FaPen } from "react-icons/fa";
-import { PiPasswordLight } from "react-icons/pi";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Min length 3 characters!")
-    .max(50, "Max length 50 characters!")
-    .required("Enter name"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().required("Required"),
 });
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(register(values))
+    dispatch(logIn(values))
       .unwrap()
-      .then((response) => toast.success(`Welcome, ${response.name}`))
-      .catch(() => toast.error("Email is already in use"));
+      .then((response) => {
+        toast.success(`Welcome, ${response.user.name}`);
+        navigate("/contacts", { replace: true });
+      })
+      .catch(() => toast.error("Wrong email or password"));
 
     resetForm();
   };
@@ -31,19 +32,11 @@ const RegistrationForm = () => {
   return (
     <div>
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form >
-          <div>
-            <label htmlFor="name">Name</label>
-            <div >
-              <Field type="text" name="name" placeholder="Name" />
-              <FaPen/>
-            </div>
-            <ErrorMessage name="name" component="span" />
-          </div>
+        <Form>
           <div>
             <label htmlFor="email">Email</label>
             <div>
@@ -52,19 +45,20 @@ const RegistrationForm = () => {
             </div>
             <ErrorMessage name="email" component="span" />
           </div>
-          <div >
+          <div>
             <label htmlFor="password">Password</label>
             <div>
               <Field type="password" name="password" placeholder="Password" />
-              <PiPasswordLight/>
+              <FaPen />
             </div>
             <ErrorMessage
               name="password"
               component="span"
             />
           </div>
+
           <button type="submit">
-            Register
+            Login
           </button>
         </Form>
       </Formik>
@@ -72,4 +66,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

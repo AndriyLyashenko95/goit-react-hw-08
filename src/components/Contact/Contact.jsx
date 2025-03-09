@@ -1,30 +1,28 @@
-import React from "react";
-import { useDispatch } from 'react-redux';
-import { FaUser } from "react-icons/fa";
-import { BsFillTelephoneFill } from "react-icons/bs";
-import { deleteContact } from '../../redux/contactsSlice';
+import { FaUser, FaPhoneAlt, FaPen } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
-const Contact = ({ contactItem }) => {
-  const dispatch = useDispatch();
-  const { name, phone } = contactItem;
-
+const Contact = ({ data: { id, name, number }, edit, handleDelete }) => {
   return (
-    <div>
-      <ul>
-        <li>
-          <FaUser className={c.icon}/> {name}
-        </li>
-        <li>
-          <BsFillTelephoneFill className={c.icon}/> {phone}
-        </li>
-      </ul>
-      <button
-        type="button"
-        onClick={() => dispatch(deleteContact(contactItem.id))}
-      >
-        Усунути
-      </button>
-    </div>
+    <ul>
+      <li>
+        <FaUser className={c.icon} />
+        {name}
+      </li>
+      <li>
+        <FaPhoneAlt/>
+        {number}
+      </li>
+      <li >
+        <button  onClick={edit}>
+          <FaPen className={c.iconDelete} />
+          Edit
+        </button>
+        <button  onClick={() => handleDelete(id)}>
+          <MdDelete className={c.iconDelete} />
+          Delete
+        </button>
+      </li>
+    </ul>
   );
 };
 

@@ -1,3 +1,4 @@
+import React from "react";
 import Navigation from "../Navigation/Navigation.jsx";
 import UserMenu from "../UserMenu/UserMenu.jsx";
 import Auth from "../Auth/Auth.jsx";

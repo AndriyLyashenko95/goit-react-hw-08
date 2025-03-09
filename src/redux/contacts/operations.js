@@ -1,38 +1,52 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
+const fetchContacts = createAsyncThunk(
+  "contacts/fetchContacts",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get("/contacts");
       return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async (newContact, thunkAPI) => {
+const addContact = createAsyncThunk(
+  "contacts/addContact",
+  async (contact, thunkAPI) => {
     try {
-      const response = await axios.post(API_URL, newContact);
+      const response = await axios.post("/contacts", contact);
       return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact',
-  async (contactId, thunkAPI) => {
+const deleteContact = createAsyncThunk(
+  "contacts/deleteContact",
+  async (id, thunkAPI) => {
     try {
-      await axios.delete(`${API_URL}/${contactId}`);
-      return contactId;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      await axios.delete(`/contacts/${id}`);
+      return id;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
+
+const editContact = createAsyncThunk(
+  "contacts/editContact",
+  async ({ id, name, number }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/contacts/${id}`, { name, number });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export { fetchContacts, addContact, deleteContact, editContact };

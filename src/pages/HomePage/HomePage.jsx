@@ -1,3 +1,4 @@
+import React from "react";
 import { FaAddressBook } from "react-icons/fa";
 
 const HomePage = () => {
@@ -5,7 +6,7 @@ const HomePage = () => {
     <div>
       <h1>
         <FaAddressBook />
-        Phonebook 💛💙
+        Записна книга
       </h1>
     </div>
   );
