@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isFormVisible: false,
-};
+// const initialState = {
+//   isFormVisible: false,
+// };
 
-const visibleSlice = createSlice({
-  name: "visible",
-  initialState,
-  reducers: {
-    toggleFormVisibility: (state) => {
-      state.isFormVisible = !state.isFormVisible;
-    },
-  },
-});
+// const visibleSlice = createSlice({
+//   name: "visible",
+//   initialState,
+//   reducers: {
+//     toggleFormVisibility: (state) => {
+//       state.isFormVisible = !state.isFormVisible;
+//     },
+//   },
+// });
 
-export const { toggleFormVisibility } = visibleSlice.actions;
-export default visibleSlice.reducer;
+// export const { toggleFormVisibility } = visibleSlice.actions;
+// export default visibleSlice.reducer;

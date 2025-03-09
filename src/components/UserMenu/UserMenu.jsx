@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../redux/auth/operations";
 import { selectUser } from "../../redux/auth/selectors";
@@ -14,7 +15,7 @@ const UserMenu = () => {
         type="button"
         onClick={() => dispatch(logOut())}
       >
-        <TbLogin2 className={c.iconLogOut} />
+        <TbLogin2/>
       </button>
     </div>
   );
