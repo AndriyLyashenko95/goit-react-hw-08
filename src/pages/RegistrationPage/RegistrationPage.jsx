@@ -1,5 +1,5 @@
 import React from 'react';
-import RegistrationForm from "../../components/RegistrationPage/RegistrationPage";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import { MdAppRegistration } from "react-icons/md";
 
 const RegistrationPage = () => {

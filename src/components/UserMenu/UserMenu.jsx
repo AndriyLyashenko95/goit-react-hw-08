@@ -10,12 +10,13 @@ const UserMenu = () => {
 
   return (
     <div>
-      <p></p>
+      {user && <p>Welcome, {user.name}!</p>} {/* Виводимо ім'я користувача */}
       <button
         type="button"
         onClick={() => dispatch(logOut())}
       >
-        <TbLogin2/>
+        <TbLogin2 />
+        Log out
       </button>
     </div>
   );

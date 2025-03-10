@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Auth = () => {
+const AuthNav = () => {
   return (
     <div>
       <NavLink
@@ -18,4 +18,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default AuthNav;
