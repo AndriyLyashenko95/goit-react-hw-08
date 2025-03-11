@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact, editContact } from "../../redux/contacts/operations";
 import { selectFilteredContacts } from "../../redux/contacts/selectors";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   TextField,
   Button,

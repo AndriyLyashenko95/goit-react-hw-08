@@ -1,3 +1,4 @@
+import React from "react";
 import { FaUser, FaPhoneAlt, FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
@@ -5,7 +6,7 @@ const Contact = ({ data: { id, name, number }, edit, handleDelete }) => {
   return (
     <ul>
       <li>
-        <FaUser className={c.icon} />
+        <FaUser/>
         {name}
       </li>
       <li>
@@ -14,11 +15,11 @@ const Contact = ({ data: { id, name, number }, edit, handleDelete }) => {
       </li>
       <li >
         <button  onClick={edit}>
-          <FaPen className={c.iconDelete} />
+          <FaPen />
           Edit
         </button>
         <button  onClick={() => handleDelete(id)}>
-          <MdDelete className={c.iconDelete} />
+          <MdDelete />
           Delete
         </button>
       </li>
